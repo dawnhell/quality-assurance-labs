@@ -34,7 +34,7 @@ public class DialogService {
 
                 switch (option) {
                     case 1:
-                        this.showFaculty(university.get_faculties());
+                        this.showFaculties(university.get_faculties());
                         this.showMenu();
                         break;
 
@@ -78,13 +78,15 @@ public class DialogService {
         }
     }
 
-    private void showFaculty(Faculty[] faculties) {
+    private void showFaculties(Faculty[] faculties) {
+        System.out.println(faculties.length);
         for (int i = 0; i < faculties.length; ++i) {
             System.out.println("Faculty #" + faculties[i].get_facultyId());
         }
     }
 
     private void showGroups(Faculty[] faculties) {
+        this.showFaculties(faculties);
         System.out.println("Select faculty:");
         int facultyId = -1;
 
@@ -104,7 +106,7 @@ public class DialogService {
 
                 System.out.println("Groups of faculty #" + facultyId);
                 for (int j = 0; j < groups.length; ++j) {
-                    System.out.println("Group #" + groups[i].get_groupId());
+                    System.out.println("Group #" + groups[j].get_groupId());
                 }
             }
         }
@@ -116,6 +118,7 @@ public class DialogService {
         int groupId   = -1;
 
         try {
+            this.showFaculties(faculties);
             System.out.println("Select faculty:");
             facultyId = new Scanner(System.in).nextInt();
 
@@ -141,7 +144,7 @@ public class DialogService {
 
                 System.out.println("Students of group #" + groupId);
                 for (int j = 0; j < students.length; ++j) {
-                    System.out.println("Student #" + students[i].get_id());
+                    System.out.println("Student #" + students[j].get_id());
                 }
             }
         }
@@ -153,8 +156,8 @@ public class DialogService {
         int studentId = -1;
 
         try {
-            this.showFaculty(faculties);
-            System.out.println("Enter student id:");
+            this.showFaculties(faculties);
+            System.out.println("Enter faculty id:");
             facultyId = new Scanner(System.in).nextInt();
 
             for (int i = 0; i < faculties.length; ++i) {
@@ -196,8 +199,8 @@ public class DialogService {
         int groupId   = -1;
 
         try {
-            this.showFaculty(faculties);
-            System.out.println("Enter student id:");
+            this.showFaculties(faculties);
+            System.out.println("Enter faculty id:");
             facultyId = new Scanner(System.in).nextInt();
 
             for (int i = 0; i < faculties.length; ++i) {
@@ -229,8 +232,8 @@ public class DialogService {
         int facultyId = -1;
 
         try {
-            this.showFaculty(faculties);
-            System.out.println("Enter student id:");
+            this.showFaculties(faculties);
+            System.out.println("Enter faculty id:");
             facultyId = new Scanner(System.in).nextInt();
 
             for (int i = 0; i < faculties.length; ++i) {

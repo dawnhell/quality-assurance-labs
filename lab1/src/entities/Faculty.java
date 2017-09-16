@@ -1,15 +1,15 @@
 package entities;
 
 public class Faculty {
-    private int     _facultyId;
+    private long    _facultyId;
     private Group[] _groups;
 
-    public Faculty(int _facultyId, Group[] _groups) {
+    public Faculty(long _facultyId, Group[] _groups) {
         this._facultyId = _facultyId;
         this._groups = _groups;
     }
 
-    public int get_facultyId() {
+    public long get_facultyId() {
         return this._facultyId;
     }
 
@@ -17,7 +17,7 @@ public class Faculty {
         return this._groups;
     }
 
-    public void set_facultyId(int _facultyId) {
+    public void set_facultyId(long _facultyId) {
         this._facultyId = _facultyId;
     }
 

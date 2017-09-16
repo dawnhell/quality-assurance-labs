@@ -1,19 +1,19 @@
 package entities;
 
 public class Subject {
-    private int    _id;
+    private long   _id;
     private String _name;
 
-    public Subject(int _id, String _name) {
+    public Subject(long _id, String _name) {
         this._id = _id;
         this._name = _name;
     }
 
-    public int get_id() {
+    public long get_id() {
         return _id;
     }
 
-    public void set_id(int _id) {
+    public void set_id(long _id) {
         this._id = _id;
     }
 

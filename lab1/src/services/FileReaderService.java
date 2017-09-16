@@ -1,18 +1,21 @@
 package services;
 
+import entities.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
-import java.util.Iterator;
-import java.util.Set;
 
 public class FileReaderService {
     private String FILE_PATH = System.getProperty("user.dir") + "/src/data/data.json";
 
-    public JSONObject readDataFromFile() {
+    public University getUniversityFromFile() {
+        return this.parseUniversity(this.readDataFromFile());
+    }
+
+    private JSONObject readDataFromFile() {
         JSONObject jsonObject = new JSONObject();
 
         try {
@@ -21,8 +24,6 @@ public class FileReaderService {
             Object     object = parser.parse(new FileReader(file));
 
             jsonObject = (JSONObject) object;
-
-            this.parseJSON(jsonObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -30,37 +31,98 @@ public class FileReaderService {
         return jsonObject;
     }
 
-    private void parseJSON(JSONObject jsonObject) {
-        Set<Object> set = jsonObject.keySet();
-        Iterator<Object> iterator = set.iterator();
+    private University parseUniversity(JSONObject jsonObject) {
+        JSONObject universityObject = (JSONObject) jsonObject.get("university");
 
-        System.out.println(((JSONObject)jsonObject.get("university")).keySet().iterator().next());
+        return new CreatorService().createUniversity(
+            (long) universityObject.get("id"),
+            this.parseFaculties((JSONArray) universityObject.get("faculties"))
+        );
+    }
 
-        int universityId;
-        System.out.println(set);
+    private Faculty[] parseFaculties(JSONArray facultiesObject) {
+        Faculty[] faculties = new Faculty[facultiesObject.size()];
 
-        while (iterator.hasNext()) {
-            Object obj = iterator.next();
-
-            System.out.println(obj);
-
-            if (obj.equals("university")) {
-                System.out.println();
-            }
-
-
-            /*if (jsonObject.get(obj) instanceof JSONArray) {
-                System.out.println(obj.toString());
-//                getArray(jsonObject.get(obj));
-            } else {
-                if (jsonObject.get(obj) instanceof JSONObject) {
-                    parseJSON((JSONObject) jsonObject.get(obj));
-                } else {
-                    System.out.println(obj.toString() + "\t"
-                            + jsonObject.get(obj));
-                }
-            }*/
+        for (int i = 0; i < facultiesObject.size(); ++i) {
+            faculties[i] = this.parseFaculty((JSONObject) facultiesObject.get(i));
         }
 
+        return faculties;
+    }
+
+    private Faculty parseFaculty(JSONObject facultyObject) {
+        return new CreatorService().createFaculty(
+            (long) facultyObject.get("id"),
+            this.parseGroups((JSONArray) facultyObject.get("groups"))
+        );
+    }
+
+    private Group[] parseGroups(JSONArray groupsObject) {
+        Group[] groups = new Group[groupsObject.size()];
+
+        for (int i = 0; i < groupsObject.size(); ++i) {
+            groups[i] = this.parseGroup((JSONObject) groupsObject.get(i));
+        }
+
+        return groups;
+    }
+
+    private Group parseGroup(JSONObject groupObject) {
+        return new CreatorService().createGroup(
+            (long) groupObject.get("id"),
+            this.parseStudents((JSONArray) groupObject.get("students"))
+        );
+    }
+
+    private Student[] parseStudents(JSONArray studentsObject) {
+        Student[] students = new Student[studentsObject.size()];
+
+        for (int i = 0; i < studentsObject.size(); ++i) {
+            students[i] = this.parseStudent((JSONObject) studentsObject.get(i));
+        }
+
+        return students;
+    }
+
+    private Student parseStudent(JSONObject studentObject) {
+        return new CreatorService().createStudent(
+            (long) studentObject.get("id"),
+            this.parseSubjects((JSONArray) studentObject.get("subjects")),
+            this.parseMarks((JSONArray) studentObject.get("marks"))
+        );
+    }
+
+    private Mark[] parseMarks(JSONArray marksObject) {
+        Mark[] marks = new Mark[marksObject.size()];
+
+        for (int i = 0; i < marksObject.size(); ++i) {
+            marks[i] = this.parseMark((JSONObject) marksObject.get(i));
+        }
+
+        return marks;
+    }
+
+    private Mark parseMark(JSONObject markObject) {
+        return new CreatorService().createMark(
+            (long) markObject.get("subjectId"),
+            (long) markObject.get("mark")
+        );
+    }
+
+    private Subject[] parseSubjects(JSONArray subjectObject) {
+        Subject[] subjects = new Subject[subjectObject.size()];
+
+        for (int i = 0; i < subjectObject.size(); ++i) {
+            subjects[i] = this.parseSubject((JSONObject) subjectObject.get(i));
+        }
+
+        return subjects;
+    }
+
+    private Subject parseSubject(JSONObject subjectObject) {
+        return new CreatorService().createSubject(
+            (long) subjectObject.get("id"),
+            (String) subjectObject.get("name")
+        );
     }
 }

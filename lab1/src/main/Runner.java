@@ -1,12 +1,11 @@
 package main;
 
-import data.MockData;
 import entities.University;
 import services.DialogService;
+import services.FileReaderService;
 
 public class Runner {
     private University    university;
-    private DialogService dialogService;
 
     public Runner() {
         this.createUniversityFromMockData();
@@ -14,10 +13,10 @@ public class Runner {
     }
 
     private void createUniversityFromMockData() {
-        this.university = new MockData().initialize();
+        this.university = new FileReaderService().getUniversityFromFile();
     }
 
     private void initializeDialog() {
-        this.dialogService = new DialogService(this.university);
+        new DialogService(this.university);
     }
 }

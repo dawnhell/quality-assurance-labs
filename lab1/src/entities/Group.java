@@ -1,15 +1,15 @@
 package entities;
 
 public class Group {
-    private int       _groupId;
+    private long      _groupId;
     private Student[] _students;
 
-    public Group(int _groupId, Student[] _students) {
+    public Group(long _groupId, Student[] _students) {
         this._groupId = _groupId;
         this._students = _students;
     }
 
-    public int get_groupId() {
+    public long get_groupId() {
         return this._groupId;
     }
 
@@ -17,7 +17,7 @@ public class Group {
         return this._students;
     }
 
-    public void set_groupId(int _groupId) {
+    public void set_groupId(long _groupId) {
         this._groupId = _groupId;
     }
 

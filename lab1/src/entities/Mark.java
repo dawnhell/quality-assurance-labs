@@ -1,27 +1,27 @@
 package entities;
 
 public class Mark {
-    private int _subjectId;
-    private int _mark;
+    private long _subjectId;
+    private long _mark;
 
-    public Mark(int _subjectId, int _mark) {
+    public Mark(long _subjectId, long _mark) {
         this._subjectId = _subjectId;
         this._mark      = _mark;
     }
 
-    public int get_subjectId() {
+    public long get_subjectId() {
         return this._subjectId;
     }
 
-    public int get_mark() {
+    public long get_mark() {
         return this._mark;
     }
 
-    public void set_subjectId(int _subjectId) {
+    public void set_subjectId(long _subjectId) {
         this._subjectId = _subjectId;
     }
 
-    public void set_mark(int _mark) {
+    public void set_mark(long _mark) {
         this._mark = _mark;
     }
 }
