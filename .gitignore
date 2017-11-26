@@ -3,3 +3,5 @@ out/
 .gradle/
 gradle/
 build/
+target/
+lab4.iml
