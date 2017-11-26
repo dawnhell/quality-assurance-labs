@@ -11,6 +11,11 @@ public class SignInPage extends Page {
     private final Logger logger   = LogManager.getRootLogger();
     private final String BASE_URL = "https://fahrkarten.bahn.de/cache/start/start.post?lang=en&scope=login#stay";
 
+    public SignInPage(WebDriver webDriver) {
+        super(webDriver);
+        PageFactory.initElements(this.webDriver, this);
+    }
+
     @FindBy(id = "login-input-loginname")
     private WebElement inputLogin;
 
@@ -22,11 +27,6 @@ public class SignInPage extends Page {
 
     @FindBy(xpath = "//p[@class='nobottommargin']//span")
     private WebElement userName;
-
-    public SignInPage(WebDriver webDriver) {
-        super(webDriver);
-        PageFactory.initElements(this.webDriver, this);
-    }
 
     @Override
     public void open() {
