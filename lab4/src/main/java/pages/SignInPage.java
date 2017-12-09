@@ -28,6 +28,9 @@ public class SignInPage extends Page {
     @FindBy(xpath = "//p[@class='nobottommargin']//span")
     private WebElement userName;
 
+    @FindBy(className = "errormsg")
+    private WebElement errorMsg;
+
     @Override
     public void open() {
         webDriver.navigate().to(BASE_URL);
@@ -41,7 +44,11 @@ public class SignInPage extends Page {
         logger.info("Sign In performed");
     }
 
+    public String getErrorMsg() {
+        return errorMsg.getText();
+    }
+
     public String getUsername() {
-        return userName.getText().toString();
+        return userName.getText();
     }
 }
