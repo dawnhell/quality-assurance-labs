@@ -36,8 +36,14 @@ public class TestRunner {
         Assert.assertTrue(steps.isOnSchedulePage(constants.getSCHEDULE_PAGE_TITLE()));
     }
 
+    @Test
+    public void performIncreaseFontSize() {
+        steps.increaseFontSize();
+        Assert.assertTrue(steps.isCurrentFontSizeLarge(constants.getLARGE_FONT_HEIGHT()));
+    }
+
     @AfterTest(description = "Stop browser")
     public void stopBrowser() {
-        steps. closeDriver();
+        steps.closeDriver();
     }
 }

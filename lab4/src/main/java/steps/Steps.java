@@ -6,15 +6,17 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 public class Steps {
-    private WebDriver driver;
-    private final Logger logger = LogManager.getRootLogger();
-    private SignInSteps signInSteps;
-    private ScheduleSteps scheduleSteps;
+    private WebDriver         driver;
+    private final Logger      logger = LogManager.getRootLogger();
+    private SignInSteps       signInSteps;
+    private ScheduleSteps     scheduleSteps;
+    private IncreaseFontSteps increaseFontSteps;
 
     public void initBrowser() {
-        driver = DriverSingleton.getDriver();
-        signInSteps = new SignInSteps();
-        scheduleSteps = new ScheduleSteps();
+        driver            = DriverSingleton.getDriver();
+        signInSteps       = new SignInSteps();
+        scheduleSteps     = new ScheduleSteps();
+        increaseFontSteps = new IncreaseFontSteps();
     }
 
     public void closeDriver() {
@@ -43,5 +45,13 @@ public class Steps {
 
     public boolean isOnSchedulePage(String title) {
         return scheduleSteps.isOnSchedulePage(driver, logger, title);
+    }
+
+    public void increaseFontSize() {
+        increaseFontSteps.increaseFont(driver, logger);
+    }
+
+    public boolean isCurrentFontSizeLarge(int largeFontSize) {
+        return increaseFontSteps.isCurrentFontSizeLarge(driver, logger, largeFontSize);
     }
 }

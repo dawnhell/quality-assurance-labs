@@ -13,6 +13,7 @@ public class Constants {
     private final String FROM_CITY           = "FRANKFURT(MAIN)";
     private final String TO_CITY             = "München Hbf";
     private final String SCHEDULE_PAGE_TITLE = "Outward journey on " + new SimpleDateFormat("dd.MM.yy").format(Calendar.getInstance().getTime());
+    private final int    LARGE_FONT_HEIGHT   = 19;
 
     public String getUSERNAME() {
         return USERNAME;
@@ -48,5 +49,9 @@ public class Constants {
 
     public String getSCHEDULE_PAGE_TITLE() {
         return SCHEDULE_PAGE_TITLE;
+    }
+
+    public int getLARGE_FONT_HEIGHT() {
+        return LARGE_FONT_HEIGHT;
     }
 }
